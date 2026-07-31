@@ -24,6 +24,7 @@ main {
 }
 
 .intro{
+    position: relative;
     display: flex;
     height: 100vh;
     width: 100vw;
@@ -70,8 +71,6 @@ main {
     transition: transform 150ms ease, box-shadow 150ms ease, background-color 120ms ease;
     will-change: transform, box-shadow;
 }
-
-#intro_btn
 
 .btn:hover{
     transform: translate(-50%, -50%) translateY(-8px) scale(1.02);
@@ -127,7 +126,7 @@ main {
 
 .info{
     position: absolute;
-    display: flex;
+    display: flex; /* JS sets this inline when shown; display:none below is what actually applies at load */
     flex-direction: column;
     background-color: rgba(247, 160, 204, 0.605);
     border-radius: 20px;
@@ -187,6 +186,22 @@ main {
     transition: transform 150ms ease, box-shadow 150ms ease, background-color 120ms ease;
 }
 
+/* interactive states for choice buttons */
+.btn_choice:hover{
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 10px 10px 0 0 #c04b86, -8px -8px 0 0 #ffd6ea;
+}
+
+.btn_choice:active{
+    transform: translateY(2px) scale(0.98);
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.08);
+}
+
+.btn_choice:focus{
+    outline: 3px solid rgba(255, 90, 150, 0.6);
+    outline-offset: 4px;
+}
+
 
 @keyframes fadeIn {
     from {
@@ -197,3 +212,161 @@ main {
     }
 }
 
+/* Gift box styles */
+.gift{
+    /* position gift exactly where .info sits */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    width: 680px;
+    min-height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 16px;
+    background: linear-gradient(180deg,#fff0f6 0%, #ffdff0 100%);
+    border: 6px solid #ff5daa;
+    box-shadow: 12px 12px 0 0 #c04b86, -8px -8px 0 0 #ffd6ea;
+    padding: 22px;
+    border-radius: 8px;
+    color: #3b0020;
+    text-align: left;
+    opacity: 0;
+    pointer-events: none; /* hidden by default so it can't block clicks on the buttons underneath */
+    z-index: 80;
+    transition: transform 340ms cubic-bezier(.2,.8,.2,1), opacity 240ms ease;
+    /* subtle paper texture lines */
+    background-image: repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 6px), linear-gradient(180deg,#fff0f6,#ffdff0);
+}
+
+.gift.show{
+    opacity: 1;
+    pointer-events: auto; /* re-enable now that it's actually visible */
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    animation: giftPop 360ms cubic-bezier(.2,.9,.3,1);
+}
+
+@keyframes giftPop {
+    0% { transform: translate(-50%, -50%) scale(0.85) rotate(-6deg); opacity: 0 }
+    60% { transform: translate(-50%, -50%) scale(1.06) rotate(4deg); opacity: 1 }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1 }
+}
+
+.gift .img1 img, .gift .img2 img{
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: 4px solid #ff5daa;
+    display: block;
+}
+
+/* images sit side by side above the letter instead of floating text around them */
+.gift .img1, .gift .img2{
+    margin: 0;
+}
+
+.gift .letter{
+    display: block;
+    flex-basis: 100%;
+    width: 100%;
+    color: #300016;
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: 400; /* this is an <h3>, so it was inheriting the browser's bold default */
+    text-align: left;
+    margin: 6px 0 0 0;
+}
+
+.gift .letter span{
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    text-shadow: 2px 2px 0 rgba(255, 93, 170, 0.25);
+}
+
+/* small animations for inner elements */
+.gift .img1, .gift .img2{ animation: floatUp 1200ms ease both; }
+.gift .letter{ animation: fadeSlide 600ms ease both; animation-delay: 120ms; }
+
+@keyframes floatUp{
+    from { transform: translateY(8px); opacity: 0 }
+    to { transform: translateY(0); opacity: 1 }
+}
+
+@keyframes fadeSlide{
+    from { transform: translateY(6px); opacity: 0 }
+    to { transform: translateY(0); opacity: 1 }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+    .info{
+        width: 92vw;
+        height: auto;
+        max-height: 88vh;
+        overflow-y: auto;
+        padding: 20px 0;
+    }
+
+    .text{
+        padding: 30px 20px;
+        gap: 14px;
+    }
+
+    .text h3{
+        font-size: 30px;
+    }
+
+    .dec_btn{
+        padding-top: 40px;
+        flex-wrap: wrap;
+    }
+
+    .gift{
+        width: 92vw;
+        padding: 18px;
+        gap: 12px;
+    }
+
+    .gift .letter span{
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn{
+        width: 130px;
+        height: 48px;
+        font-size: 12px;
+    }
+
+    .text h3{
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+
+    .btn_choice{
+        width: 100px;
+        height: 36px;
+        font-size: 10px;
+    }
+
+    .gift .img1 img, .gift .img2 img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .gift .letter{
+        font-size: 14px;
+    }
+
+    .gift .letter span{
+        font-size: 19px;
+    }
+}
