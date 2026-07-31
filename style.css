@@ -1,0 +1,199 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+
+
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+    background-image: url('assets/images/wp12590757-pink-pixel-art-wallpapers.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+main {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.intro{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.intro_box{
+    position: relative;
+    flex: 1;
+    z-index: 0;
+    border: 6px solid #ff5daa; /* bright pink pixel border */
+    background-color: #ff6ea8; /* slightly darker pink fill */
+    overflow: hidden;
+}
+
+
+
+
+.btn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160px;
+    height: 56px;
+    background-color: #ff8ac1;
+    border: 6px solid #ff5daa; /* match intro_box border */
+    border-radius: 0; /* sharp pixel corners */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pixelify Sans', 'Courier New', monospace;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    box-shadow: 6px 6px 0 0 #c04b86, -6px -6px 0 0 #ffd6ea; /* chunkier base shadow */
+    image-rendering: pixelated;
+    z-index: 50;
+    transition: transform 150ms ease, box-shadow 150ms ease, background-color 120ms ease;
+    will-change: transform, box-shadow;
+}
+
+#intro_btn
+
+.btn:hover{
+    transform: translate(-50%, -50%) translateY(-8px) scale(1.02);
+    box-shadow: 10px 10px 0 0 #c04b86, -8px -8px 0 0 #ffd6ea;
+}
+
+.btn:active{
+    transform: translate(-50%, -50%) translateY(2px) scale(0.98);
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.12), 2px 2px 0 0 #c04b86;
+}
+
+.btn:focus{
+    outline: 3px solid rgba(255, 90, 150, 0.6);
+    outline-offset: 4px;
+}
+
+.btn::before{
+    content: 'OPEN';
+    pointer-events: none;
+}
+
+.animation_box1{
+    animation: slideOutLeft 0.8s ease-in-out forwards;
+}
+
+.animation_box2{
+    animation: slideOutRight 0.8s ease-in-out forwards;
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.info{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(247, 160, 204, 0.605);
+    border-radius: 20px;
+    width: 700px;
+    height: 500px;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 10;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+.text{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    justify-content: center;
+    gap: 20px;
+}
+.text h3{
+    font-size: 48px;
+    margin: 0;
+    padding: 0;
+    text-shadow: 4px 4px 0 #c04b86, -4px -4px 0 #ffd6ea; 
+    letter-spacing: 2px;
+}
+
+.dec_btn{
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn_choice{
+    width: 120px;
+    height: 40px;
+    background-color: #ff8ac1;
+    border: 4px solid #ff5daa; /* match intro_box border */
+    border-radius: 0; /* sharp pixel corners */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pixelify Sans', 'Courier New', monospace;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    box-shadow: 4px 4px 0 0 #c04b86, -4px -4px 0 0 #ffd6ea; /* chunkier base shadow */
+    image-rendering: pixelated;
+    z-index: 50;
+    transition: transform 150ms ease, box-shadow 150ms ease, background-color 120ms ease;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
