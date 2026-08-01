@@ -386,21 +386,30 @@ main {
     }
 
     .gift{
-        width: 92vw;
+        width: min(92vw, 100%);
+        max-width: calc(100vw - 24px);
+        max-height: min(78vh, 540px);
         padding: 16px;
         gap: 12px;
+        overflow-y: auto;
+        box-sizing: border-box;
     }
 
     .gift .img1 img, .gift .img2 img{
-        width: 100px;
-        height: 100px;
+        width: clamp(70px, 24vw, 100px);
+        height: auto;
+        max-height: 100px;
+        object-fit: contain;
     }
 
     .gift .letter{
-        font-size: 14px;
+        font-size: 13px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
     }
 
     .gift .letter span{
-        font-size: 20px;
+        font-size: clamp(16px, 4.2vw, 20px);
+        margin-bottom: 10px;
     }
 }
